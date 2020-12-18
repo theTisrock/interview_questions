@@ -1,25 +1,26 @@
+#
+# Implement an algorithm to determine if a string has all unique characters.
+# What is you cannot use additional data structures?
 
 
-def _get_char_counts(chars: str):
+def only_unique_chars(chars: str):
+	"""
+	O(n) runtime
+	Uses a hash map as a helper to count char occurences.
+	"""
+	result = True
 	char_counts = dict()
 	
 	for char in chars:  # initialize
-		char_counts[char] = 0
+		if char != " ":
+			char_counts[char] = 0
 			
 	for char in chars:  # count occurances
-		char_counts[char] += 1
+		if char != " ":
+			char_counts[char] += 1
 		
-	return char_counts
-		
-	
-
-def only_unique_chars(chars: str):
-	result = True
-	
-	char_map = _get_char_counts(chars)
-		
-	for key in char_map.keys():  # find more than 1 occurances
-		if key != " " and char_map[key] > 1:
+	for key in char_counts.keys():  # find more than 1 occurances
+		if char_counts[key] > 1:
 			result = False
 			repeated = key
 			break
@@ -28,6 +29,10 @@ def only_unique_chars(chars: str):
 	
 
 def _only_unique_chars(chars: str):
+	"""
+	O(n^2) runtime
+	Uses no additional data structures. Instead, it compares each char to every other char to find a duplicate case.
+	"""
 	result = True
 	
 	start_at = 0
